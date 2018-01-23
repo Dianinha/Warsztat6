@@ -18,18 +18,18 @@
 	<form:form action="register" method="post" modelAttribute="user">
 		<div>
 			Login:
-			<f:input path="username" />
-			<f:errors path="username" cssClass="error" />
+			<form:input path="username" />
+			<form:errors path="username" cssClass="error" />
 		</div>
 		<div>
 			Password:
-			<f:password path="password" />
-			<f:errors path="password" cssClass="error" />
+			<form:password path="password" />
+			<form:errors path="password" cssClass="error" />
 		</div>
 		<div>
 			E-mail:
-			<f:input type="email" path="email" />
-			<f:errors path="email" cssClass="error" />
+			<form:input type="email" path="email" />
+			<form:errors path="email" cssClass="error" />
 		</div>
 		<div>
 			<input type="submit" value="Register" />

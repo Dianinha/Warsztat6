@@ -23,7 +23,7 @@ public class UserController {
 	
 	@GetMapping(path = "/login")
 	public String showLoginForm() {
-		return "user/login";
+		return "login/login";
 	}
 	
 	@PostMapping(path = "/login")
@@ -39,14 +39,14 @@ public class UserController {
 		
 		} else {
 			
-			return "user/login";
+			return "login/login";
 		}
 	}
 
 	@GetMapping(path = "/register")
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
-		return "user/register";
+		return "login/register";
 	}
 	
 	@PostMapping(path = "/register")
@@ -54,7 +54,7 @@ public class UserController {
 		
 		if(bresult.hasErrors()) {
 			
-			return "user/register";
+			return "login/register";
 		
 		} else {
 			

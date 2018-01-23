@@ -17,10 +17,10 @@
       Password: <input type="password" name="password"/>
     </div>
     <div>
-      <input type="submit" value="Zaloguj się"/>
+      <input type="submit" value="Log in"/>
     </div>
     <div>
-      You don't have an account? <a href=<c:url value="../login/register"/>> Register</a>
+      You don't have an account? <a href=<c:url value="/user/register"/>> Register</a>
     </div>  
 </form:form>
 </body>

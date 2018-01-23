@@ -10,11 +10,11 @@
 </head>
 <body>
 Homepage
-
-I already have an account: <a href=<c:url value="login/login"/>> Click here!</a>
+<br>
+I already have an account: <a href=<c:url value="/user/login"/>> Click here!</a>
 
 <br>
 
-I want to register: <a href=<c:url value="login/register"/>> Click here!</a>
+I want to register: <a href=<c:url value="user/register"/>> Click here!</a>
 </body>
 </html>
