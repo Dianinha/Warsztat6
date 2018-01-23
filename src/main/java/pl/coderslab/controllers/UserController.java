@@ -2,6 +2,7 @@ package pl.coderslab.controllers;
 
 import javax.validation.Valid;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,30 +16,37 @@ import pl.coderslab.entities.User;
 import pl.coderslab.repositories.UserRepository;
 
 @Controller
-@RequestMapping(path="/user")
+@RequestMapping(path = "/user")
 public class UserController {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@GetMapping(path = "/login")
 	public String showLoginForm() {
 		return "login/login";
 	}
-	
+
 	@PostMapping(path = "/login")
 	public String processLoginRequest(@RequestParam("username") String username,
 			@RequestParam("password") String password, Model model) {
-		
-		User user = userRepository.findOneByUsernameAndPassword(username, password);
-		
-		if(user != null) {
+		User user = userRepository.findOneByUsername(username);
+
+		if (user != null) {
+			String passHashed = user.getPassword();
+			if (BCrypt.checkpw(password, passHashed)) {
+				System.out.println("It matches");
+				model.addAttribute("username", username);
+				return "login/success";
+			} else {
+				System.out.println("It does not match");
+				model.addAttribute("message", "Password does not match");
+				return "login/login";
+			}
 			
-			model.addAttribute("username", username);
-			return "user/success";
-		
+
 		} else {
-			
+			model.addAttribute("message", "There is no user with this username.");
 			return "login/login";
 		}
 	}
@@ -48,20 +56,24 @@ public class UserController {
 		model.addAttribute("user", new User());
 		return "login/register";
 	}
-	
+
 	@PostMapping(path = "/register")
 	public String processRegistartionRequest(@Valid User user, BindingResult bresult) {
-		
-		if(bresult.hasErrors()) {
-			
+
+		if (bresult.hasErrors()) {
+
 			return "login/register";
-		
+
 		} else {
-			
-			userRepository.save(user);
-			return "user/success";
-			
+			if (user.getPassword()!=null) {
+				userRepository.save(user);
+				return "login/success";
+			}
+			else {
+				return "login/register";
+			}
+
 		}
-}
+	}
 
 }

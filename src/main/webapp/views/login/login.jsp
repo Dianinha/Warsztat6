@@ -22,6 +22,9 @@
     <div>
       You don't have an account? <a href=<c:url value="/user/register"/>> Register</a>
     </div>  
+    <c:if test="${not empty message }">
+	<c:out value="${message}"></c:out>    
+</c:if>
 </form:form>
 </body>
 </html>

@@ -3,6 +3,7 @@ package pl.coderslab.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class User {
 	private long id;
 
 	@NotNull
+	@Column(unique=true)
 	private String username;
 
 	@NotNull
