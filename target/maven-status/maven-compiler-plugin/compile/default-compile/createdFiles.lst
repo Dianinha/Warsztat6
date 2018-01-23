@@ -1,0 +1,9 @@
+pl/coderslab/controllers/HomeController.class
+pl/coderslab/config/ApplicationInitializer.class
+pl/coderslab/entities/Message.class
+pl/coderslab/entities/Comment.class
+pl/coderslab/controllers/UserController.class
+pl/coderslab/entities/User.class
+pl/coderslab/config/AppConfig.class
+pl/coderslab/repositories/UserRepository.class
+pl/coderslab/entities/Tweet.class

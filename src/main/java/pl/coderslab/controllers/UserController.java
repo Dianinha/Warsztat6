@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.coderslab.entities.User;
-import pl.corderslab.repositories.UserRepository;
+import pl.coderslab.repositories.UserRepository;
 
 @Controller
 @RequestMapping(path="/user")
