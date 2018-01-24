@@ -9,12 +9,45 @@
 <title>Homepage</title>
 </head>
 <body>
-Homepage
-<br>
-I already have an account: <a href=<c:url value="/user/login"/>> Click here!</a>
+	Homepage
+	<br> I already have an account:
+	<a href=<c:url value="/user/login"/>> Click here!</a>
 
-<br>
+	<br> I want to register:
+	<a href=<c:url value="user/register"/>> Click here!</a>
 
-I want to register: <a href=<c:url value="user/register"/>> Click here!</a>
+	<br>
+
+	<c:forEach items="${tweets}" var="tweet1">
+Title:<c:out value="${tweet1.title }"></c:out>
+		<br>
+Content: <c:out value="${tweet1.text }"></c:out>
+		<br>
+Created: <c:out value="${tweet1.created }"></c:out>
+		<br>
+Author: <c:out value="${tweet1.user.username }"></c:out>
+		<br>
+		<a href=<c:url value="tweet/${tweet1.id}"/>> Show details</a>
+		<br>
+		<br>
+
+	</c:forEach>
+	<c:if test="${not empty loggedUser }">
+	Tweet something:
+	<form:form action="newTweet" method="post" modelAttribute="tweet">
+			<div>
+				Title:
+				<form:input path="title" />
+			</div>
+			<div>
+				Content:
+				<form:input path="text" />
+			</div>
+			<div>
+				<input type="submit" value="Tweet it to the world" />
+			</div>
+
+		</form:form>
+	</c:if>
 </body>
 </html>

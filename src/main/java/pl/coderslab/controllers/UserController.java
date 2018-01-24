@@ -1,5 +1,6 @@
 package pl.coderslab.controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -29,7 +30,7 @@ public class UserController {
 
 	@PostMapping(path = "/login")
 	public String processLoginRequest(@RequestParam("username") String username,
-			@RequestParam("password") String password, Model model) {
+			@RequestParam("password") String password, Model model,HttpSession session) {
 		User user = userRepository.findOneByUsername(username);
 
 		if (user != null) {
@@ -37,6 +38,7 @@ public class UserController {
 			if (BCrypt.checkpw(password, passHashed)) {
 				System.out.println("It matches");
 				model.addAttribute("username", username);
+				session.setAttribute("loggedUser", user);
 				return "login/success";
 			} else {
 				System.out.println("It does not match");
@@ -58,7 +60,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/register")
-	public String processRegistartionRequest(@Valid User user, BindingResult bresult) {
+	public String processRegistartionRequest(@Valid User user, BindingResult bresult, HttpSession session) {
 
 		if (bresult.hasErrors()) {
 
@@ -67,6 +69,7 @@ public class UserController {
 		} else {
 			if (user.getPassword()!=null) {
 				userRepository.save(user);
+				session.setAttribute("loggedUser", user);
 				return "login/success";
 			}
 			else {
